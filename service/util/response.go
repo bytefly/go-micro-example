@@ -1,9 +1,9 @@
 package util
 
 import (
-	"common/log"
 	"encoding/json"
-	"github.com/micro/go-api/proto"
+	"github.com/micro/go-micro/v2/api/proto"
+	"log"
 )
 
 type CommonResponse struct {
@@ -13,7 +13,7 @@ type CommonResponse struct {
 
 func Resp(code int32, err error, rsp *go_api.Response, response interface{}) error {
 	if err != nil {
-		log.Error(nil, err)
+		log.Println(err)
 		changeBody(code, err.Error(), rsp, response)
 	} else {
 		changeBody(code, "ok", rsp, response)

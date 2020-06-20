@@ -2,7 +2,6 @@ package config
 
 import (
 	"fmt"
-	"github.com/Unknwon/com"
 	consul "github.com/hashicorp/consul/api"
 	"github.com/spf13/viper"
 	"log"
@@ -81,5 +80,5 @@ func getConfigServiceFromConsul(configServerHost string) string {
 		return ""
 	}
 	service := rsp[rand.Int()%len(rsp)]
-	return "http://" + service.Service.Address + ":" + com.ToStr(service.Service.Port)
+	return fmt.Sprintf("http://%s:%d", service.Service.Address, service.Service.Port)
 }

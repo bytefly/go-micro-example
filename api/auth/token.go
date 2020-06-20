@@ -1,9 +1,9 @@
 package auth
 
 import (
+	"github.com/bytefly/go-micro-example/service/constant/micro_c"
+	"github.com/bytefly/go-micro-example/service/user/proto"
 	"github.com/dgrijalva/jwt-go"
-	"go-micro-example/service/constant/micro_c"
-	"go-micro-example/service/user/proto"
 	"time"
 )
 

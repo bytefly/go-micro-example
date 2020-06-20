@@ -2,10 +2,10 @@ package service
 
 import (
 	"errors"
-	"go-micro-example/api/auth"
-	"go-micro-example/service/constant/code"
-	"go-micro-example/service/user/dto"
-	"go-micro-example/service/user/proto"
+	"github.com/bytefly/go-micro-example/api/auth"
+	"github.com/bytefly/go-micro-example/service/constant/code"
+	"github.com/bytefly/go-micro-example/service/user/dto"
+	"github.com/bytefly/go-micro-example/service/user/proto"
 )
 
 type UserService struct {

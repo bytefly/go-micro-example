@@ -4,17 +4,17 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/micro/cli"
-	"github.com/micro/go-api/proto"
-	"github.com/micro/go-micro"
-	"go-micro-example/hystrix"
-	. "go-micro-example/service/config"
-	"go-micro-example/service/constant/micro_c"
-	"go-micro-example/service/greeter/dto"
-	greeterApi "go-micro-example/service/greeter/proto"
-	"go-micro-example/service/greeter/service"
-	"go-micro-example/service/user/proto"
-	"go-micro-example/service/util"
+	"github.com/bytefly/go-micro-example/hystrix"
+	. "github.com/bytefly/go-micro-example/service/config"
+	"github.com/bytefly/go-micro-example/service/constant/micro_c"
+	"github.com/bytefly/go-micro-example/service/greeter/dto"
+	greeterApi "github.com/bytefly/go-micro-example/service/greeter/proto"
+	"github.com/bytefly/go-micro-example/service/greeter/service"
+	"github.com/bytefly/go-micro-example/service/user/proto"
+	"github.com/bytefly/go-micro-example/service/util"
+	"github.com/micro/cli/v2"
+	"github.com/micro/go-micro/v2"
+	"github.com/micro/go-micro/v2/api/proto"
 	"log"
 )
 
@@ -36,21 +36,23 @@ func main() {
 		micro.Name(micro_c.MicroNameGreeter),
 		micro.WrapClient(hystrix.NewClientWrapper()),
 		micro.Flags(
-			cli.StringFlag{
-				Name: "profile",
+			&cli.StringFlag{
+				Name:  "prof",
+				Usage: "Running environment, eg: test, prod",
 			},
 		),
 	)
+	greeterService.Init()
 
 	greeterService.Init(
-		micro.Action(func(c *cli.Context) {
-			profile := c.String("profile")
+		micro.Action(func(c *cli.Context) error {
+			profile := c.String("prof")
 			if len(profile) > 0 {
-				fmt.Println("profile set to", profile)
+				// http://config-server:8081/greeter-prod.yml
+				LocalConfig = GetConfig(micro_c.MicroConfigService, "greeter", profile)
+				fmt.Printf("config loaded from config-server is: %s\n", LocalConfig)
 			}
-			// http://config-server:8081/greeter-prod.yml
-			LocalConfig = GetConfig(micro_c.MicroConfigService, "greeter", profile)
-			fmt.Printf("config loaded from config-server is: %s\n", LocalConfig)
+			return nil
 		}))
 
 	greeterApi.RegisterGreeterHandler(greeterService.Server(), &Greeter{

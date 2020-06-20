@@ -3,10 +3,10 @@ package service
 import (
 	"context"
 	"errors"
-	"go-micro-example/service/config"
-	"go-micro-example/service/constant/code"
-	"go-micro-example/service/greeter/dto"
-	"go-micro-example/service/user/proto"
+	"github.com/bytefly/go-micro-example/service/config"
+	"github.com/bytefly/go-micro-example/service/constant/code"
+	"github.com/bytefly/go-micro-example/service/greeter/dto"
+	"github.com/bytefly/go-micro-example/service/user/proto"
 )
 
 type GreeterService struct {

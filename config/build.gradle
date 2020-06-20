@@ -15,7 +15,7 @@ apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-group = 'github.com.xbox1994'
+group = 'github.com.bytefly'
 version = '1.0'
 sourceCompatibility = 1.8
 

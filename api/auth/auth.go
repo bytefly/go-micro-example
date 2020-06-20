@@ -2,10 +2,10 @@ package auth
 
 import (
 	"encoding/json"
-	"github.com/micro/cli"
-	"github.com/micro/micro/plugin"
-	"go-micro-example/service/constant/code"
-	"go-micro-example/service/util"
+	"github.com/bytefly/go-micro-example/service/constant/code"
+	"github.com/bytefly/go-micro-example/service/util"
+	"github.com/micro/cli/v2"
+	"github.com/micro/micro/v2/plugin"
 	"log"
 	"net/http"
 )
@@ -17,7 +17,7 @@ func (*Auth) Flags() []cli.Flag {
 	return nil
 }
 
-func (*Auth) Commands() []cli.Command {
+func (*Auth) Commands() []*cli.Command {
 	return nil
 }
 
